@@ -1,0 +1,20 @@
+#!/bin/bash
+
+###
+## hipgpg :: send encrpyted messages to hipchat
+## rev 20120206 c3w@juicypop.net
+## obtain hipchat-cli from https://github.com/hipchat/hipchat-cli/blob/master/hipchat_room_message
+
+if [ ! -f ~/.hipchatrc ]; then { echo "MISSING ~/.hipchatrc  See README"; exit 1; }; fi
+if [ ! "${1}" ]; then { echo "Usage: $0 [gpg recipient] [message]"; exit 1; }; fi
+
+GPG_RECIPIENT="${1}"
+shift
+MESSAGE="${@}"
+
+. ~/.hipchatrc
+
+hipchat_room_message -t "${hipchat_token}" -r "${hipchat_room}" -f "${hipchat_user}" <<__EOF__
+[${GPG_RECIPIENT}]
+$(echo "${MESSAGE}"| gpg -a -se -r "${GPG_RECIPIENT}")
+__EOF__

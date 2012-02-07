@@ -1,0 +1,18 @@
+###
+## hipgpg :: send encrpyted messages to hipchat
+## rev 20120206 c3w@juicypop.net
+## obtain hipchat-cli from https://github.com/hipchat/hipchat-cli/blob/master/hipchat_room_message
+
+REQUIREMENTS
+	gpg, hipchat-cli, bash
+
+
+INSTALLATION
+Customize hipchatrc-dist and copy to ~/.hipchatrc
+Ensure you have everybody's keys to encrypt to
+
+RUNTIME
+hipgpg someuser@wherever.com hey man the passwd is g0rk!
+
+VERIFY
+Your encrypted message will appear in the hipchat channel specified in ~/.hipchatrc, with the recipient email in plain text
